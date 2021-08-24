@@ -2,6 +2,7 @@ package br.com.zupacademy.gomesmr.casadocodigo.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,7 @@ public class AutorController {
 	}
 	
 	@PostMapping
-	private ResponseEntity<AutorDto> cadastrar(@RequestBody AutorForm autorForm)
+	private ResponseEntity<AutorDto> cadastrar(@RequestBody @Validated AutorForm autorForm)
 			throws Exception{
 		Autor autor = autorForm.converter();
 		autorRepository.save(autor);

@@ -2,11 +2,20 @@ package br.com.zupacademy.gomesmr.casadocodigo.model.dto;
 
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
+
 import br.com.zupacademy.gomesmr.casadocodigo.model.Autor;
 
 public class AutorForm {
+	@NotBlank (message="Nome em branco")
 	private String nome;
+	@NotBlank(message = "E-mail em branco")
+	@Email(message = "E-mail inválido!")
 	private String email;
+	@NotBlank (message="Insira uma descrição")
 	private String descricao;
 	
 	public Autor converter() {

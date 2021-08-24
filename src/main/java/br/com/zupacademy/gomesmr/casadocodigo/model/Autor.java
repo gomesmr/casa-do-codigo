@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.Length;
+
 import br.com.zupacademy.gomesmr.casadocodigo.model.dto.AutorDto;
 
 @Entity
@@ -16,6 +18,7 @@ public class Autor {
 	private Long id;
 	private String nome;
 	private String email;
+	@Length(max = 400)
 	private String descricao;
 	private LocalDateTime instanteCriacao;
 	
