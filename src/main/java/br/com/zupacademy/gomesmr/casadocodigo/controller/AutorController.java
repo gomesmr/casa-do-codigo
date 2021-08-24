@@ -1,13 +1,11 @@
 package br.com.zupacademy.gomesmr.casadocodigo.controller;
 
-import java.net.URI;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.zupacademy.gomesmr.casadocodigo.model.Autor;
 import br.com.zupacademy.gomesmr.casadocodigo.model.dto.AutorDto;
@@ -27,11 +25,15 @@ public class AutorController {
 	}
 	
 	@PostMapping
-	private ResponseEntity<AutorDto> cadastrar(@RequestBody AutorForm autorForm, UriComponentsBuilder uriBuilder){
+	private ResponseEntity<AutorDto> cadastrar(@RequestBody AutorForm autorForm)
+			throws Exception{
 		Autor autor = autorForm.converter();
 		autorRepository.save(autor);
-		URI uri = uriBuilder.path("/autor/{id}").buildAndExpand(autor.getId()).toUri();
-		return ResponseEntity.created(uri).body(new AutorDto(autor));
+		
+		AutorDto autorDto = autor.resposta();
+		return ResponseEntity.status(HttpStatus.CREATED).body(autorDto);
+
+
     }
 		
 		

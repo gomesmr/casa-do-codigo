@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import br.com.zupacademy.gomesmr.casadocodigo.model.dto.AutorDto;
+
 @Entity
 public class Autor {
 	@Id
@@ -82,5 +84,10 @@ public class Autor {
 	 */
 	public LocalDateTime getInstanteCriacao() {
 		return instanteCriacao;
+	}
+
+
+	public AutorDto resposta() {
+		return new AutorDto(this.id, this.nome, this.email, this.descricao, this.instanteCriacao);
 	}
 }

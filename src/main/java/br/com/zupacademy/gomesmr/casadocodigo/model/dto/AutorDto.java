@@ -60,6 +60,43 @@ public class AutorDto {
 	public void setInstanteCriacao(LocalDateTime instanteCriacao) {
 		this.instanteCriacao = instanteCriacao;
 	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @return the descricao
+	 */
+	public String getDescricao() {
+		return descricao;
+	}
+
+	/**
+	 * @return the instanteCriacao
+	 */
+	public LocalDateTime getInstanteCriacao() {
+		return instanteCriacao;
+	}
+	
+	
 	
 	
 }
