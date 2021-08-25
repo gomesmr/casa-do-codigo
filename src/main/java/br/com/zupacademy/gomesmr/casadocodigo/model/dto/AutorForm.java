@@ -5,8 +5,6 @@ import java.time.LocalDateTime;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.validator.constraints.Length;
-
 import br.com.zupacademy.gomesmr.casadocodigo.model.Autor;
 
 public class AutorForm {
@@ -19,30 +17,34 @@ public class AutorForm {
 	private String descricao;
 	
 	public Autor converter() {
-		return new Autor(this.nome, this.email, this.descricao, LocalDateTime.now());
+		//if (naoExisteEmail(this.email)) {
+			return new Autor(this.nome, this.email, this.descricao, LocalDateTime.now());
+		}
+		//return null;
+	// }
+
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
 	}
 
 	/**
-	 * @param nome the nome to set
+	 * @return the email
 	 */
-	public void setNome(String nome) {
-		this.nome = nome;
+	public String getEmail() {
+		return email;
 	}
 
 	/**
-	 * @param email the email to set
+	 * @return the descricao
 	 */
-	public void setEmail(String email) {
-		this.email = email;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	/**
-	 * @param descricao the descricao to set
-	 */
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	
+
 	
 	
 }

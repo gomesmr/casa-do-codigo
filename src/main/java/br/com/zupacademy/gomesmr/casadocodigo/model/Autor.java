@@ -57,14 +57,12 @@ public class Autor {
 		return id;
 	}
 
-
 	/**
 	 * @return the nome
 	 */
 	public String getNome() {
 		return nome;
 	}
-
 
 	/**
 	 * @return the email
@@ -73,14 +71,12 @@ public class Autor {
 		return email;
 	}
 
-
 	/**
 	 * @return the descricao
 	 */
 	public String getDescricao() {
 		return descricao;
 	}
-
 
 	/**
 	 * @return the instanteCriacao
@@ -89,7 +85,10 @@ public class Autor {
 		return instanteCriacao;
 	}
 
-
+	/**
+	 * Método para instanciar o retorno ao criar uma entidade no BD
+	 * @return AutorDto
+	 */
 	public AutorDto resposta() {
 		return new AutorDto(this.id, this.nome, this.email, this.descricao, this.instanteCriacao);
 	}

@@ -10,7 +10,9 @@ public class AutorDto {
 	private String email;
 	private String descricao;
 	private LocalDateTime instanteCriacao;
+
 	/**
+	 * @param id
 	 * @param nome
 	 * @param email
 	 * @param descricao
