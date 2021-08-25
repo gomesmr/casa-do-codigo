@@ -1,33 +1,22 @@
-package br.com.zupacademy.gomesmr.casadocodigo.model;
+package br.com.zupacademy.gomesmr.casadocodigo.autor;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import org.hibernate.validator.constraints.Length;
-
-import br.com.zupacademy.gomesmr.casadocodigo.model.dto.AutorDto;
-
-@Entity
-public class Autor {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AutorDto {
 	private Long id;
 	private String nome;
 	private String email;
-	@Length(max = 400)
 	private String descricao;
 	private LocalDateTime instanteCriacao;
-	
-	
-	@Deprecated
-	public Autor() {}
 
-
-	public Autor(Long id,
+	/**
+	 * @param id
+	 * @param nome
+	 * @param email
+	 * @param descricao
+	 * @param instanteCriacao
+	 */
+	public AutorDto(Long id, 
 			String nome, 
 			String email, 
 			String descricao, 
@@ -38,17 +27,39 @@ public class Autor {
 		this.descricao = descricao;
 		this.instanteCriacao = instanteCriacao;
 	}
-
-	public Autor(String nome, 
-			String email, 
-			String descricao, 
-			LocalDateTime instanteCriacao) {
-		this.nome = nome;
-		this.email = email;
-		this.descricao = descricao;
-		this.instanteCriacao = instanteCriacao;
+	
+	public AutorDto(Autor autor) {
+		this.id = autor.getId();
+		this.nome = autor.getNome();
+		this.email = autor.getEmail();
+		this.descricao = autor.getDescricao();
+		this.instanteCriacao = autor.getInstanteCriacao();
 	}
 
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	/**
+	 * @param descricao the descricao to set
+	 */
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	/**
+	 * @param instanteCriacao the instanteCriacao to set
+	 */
+	public void setInstanteCriacao(LocalDateTime instanteCriacao) {
+		this.instanteCriacao = instanteCriacao;
+	}
 
 	/**
 	 * @return the id
@@ -84,12 +95,8 @@ public class Autor {
 	public LocalDateTime getInstanteCriacao() {
 		return instanteCriacao;
 	}
-
-	/**
-	 * Método para instanciar o retorno ao criar uma entidade no BD
-	 * @return AutorDto
-	 */
-	public AutorDto resposta() {
-		return new AutorDto(this.id, this.nome, this.email, this.descricao, this.instanteCriacao);
-	}
+	
+	
+	
+	
 }

@@ -1,11 +1,9 @@
-package br.com.zupacademy.gomesmr.casadocodigo.model.dto;
+package br.com.zupacademy.gomesmr.casadocodigo.autor;
 
 import java.time.LocalDateTime;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-
-import br.com.zupacademy.gomesmr.casadocodigo.model.Autor;
 
 public class AutorForm {
 	@NotBlank (message="Nome em branco")

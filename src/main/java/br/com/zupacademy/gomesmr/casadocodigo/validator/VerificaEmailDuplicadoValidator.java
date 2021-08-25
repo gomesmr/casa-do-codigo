@@ -1,4 +1,4 @@
-package br.com.zupacademy.gomesmr.casadocodigo.controller;
+package br.com.zupacademy.gomesmr.casadocodigo.validator;
 
 import java.util.Optional;
 
@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import br.com.zupacademy.gomesmr.casadocodigo.model.Autor;
-import br.com.zupacademy.gomesmr.casadocodigo.model.dto.AutorForm;
-import br.com.zupacademy.gomesmr.casadocodigo.repository.AutorRepository;
+import br.com.zupacademy.gomesmr.casadocodigo.autor.Autor;
+import br.com.zupacademy.gomesmr.casadocodigo.autor.AutorForm;
+import br.com.zupacademy.gomesmr.casadocodigo.autor.AutorRepository;
 
 @Component
 public class VerificaEmailDuplicadoValidator implements Validator{
