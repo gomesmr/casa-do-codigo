@@ -2,7 +2,6 @@ package br.com.zupacademy.gomesmr.casadocodigo.validator;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -14,8 +13,14 @@ import br.com.zupacademy.gomesmr.casadocodigo.autor.AutorRepository;
 @Component
 public class VerificaEmailDuplicadoValidator implements Validator{
 	
-	@Autowired
-	AutorRepository autorRepository;
+	private final AutorRepository autorRepository;
+
+	/**
+	 * @param autorRepository
+	 */
+	public VerificaEmailDuplicadoValidator(AutorRepository autorRepository) {
+		this.autorRepository = autorRepository;
+	}
 
 	@Override
 	public boolean supports(Class<?> clazz) {

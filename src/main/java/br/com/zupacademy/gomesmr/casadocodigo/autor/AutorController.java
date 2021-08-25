@@ -1,6 +1,5 @@
 package br.com.zupacademy.gomesmr.casadocodigo.autor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -17,8 +16,18 @@ import br.com.zupacademy.gomesmr.casadocodigo.validator.VerificaEmailDuplicadoVa
 @RequestMapping("/autor")
 public class AutorController {
 	private final AutorRepository autorRepository;
-	@Autowired
-	private VerificaEmailDuplicadoValidator verificaEmailDuplicadoValidator;
+	private final VerificaEmailDuplicadoValidator verificaEmailDuplicadoValidator;
+
+	/**
+	 * 
+	 * @param autorRepository
+	 * @param verificaEmailDuplicadoValidator
+	 */
+	public AutorController(AutorRepository autorRepository, 
+					VerificaEmailDuplicadoValidator verificaEmailDuplicadoValidator) {
+		this.autorRepository = autorRepository;
+		this.verificaEmailDuplicadoValidator = verificaEmailDuplicadoValidator;
+	}
 	
 	/**
 	 * Realiza configurações adicionais na Request deste Controller
@@ -29,12 +38,6 @@ public class AutorController {
 		binder.addValidators(verificaEmailDuplicadoValidator);
 	}
 
-	/**
-	 * @param autorRepository
-	 */
-	public AutorController(AutorRepository autorRepository) {
-		this.autorRepository = autorRepository;
-	}
 	
 	@PostMapping
 	private ResponseEntity<AutorDto> cadastrar(@RequestBody @Validated AutorForm autorForm)

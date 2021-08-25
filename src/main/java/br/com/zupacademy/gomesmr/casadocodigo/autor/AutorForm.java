@@ -14,12 +14,24 @@ public class AutorForm {
 	@NotBlank (message="Insira uma descrição")
 	private String descricao;
 	
+	
+	
+	/**
+	 * @param nome
+	 * @param email
+	 * @param descricao
+	 */
+	public AutorForm(String nome, String email, String descricao) {
+		this.nome = nome;
+		this.email = email;
+		this.descricao = descricao;
+	}
+
+
 	public Autor converter() {
-		//if (naoExisteEmail(this.email)) {
 			return new Autor(this.nome, this.email, this.descricao, LocalDateTime.now());
 		}
-		//return null;
-	// }
+
 
 	/**
 	 * @return the nome
