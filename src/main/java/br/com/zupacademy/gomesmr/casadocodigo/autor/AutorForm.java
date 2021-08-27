@@ -5,9 +5,13 @@ import java.time.LocalDateTime;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import br.com.zupacademy.gomesmr.casadocodigo.categoria.Categoria;
+import br.com.zupacademy.gomesmr.casadocodigo.validator.UniqueValue;
+
 public class AutorForm {
 	@NotBlank (message="Nome em branco")
 	private String nome;
+	@UniqueValue(domainClass = Autor.class, fieldName = "email", message= "Este e-mail já consta no sistema.")
 	@NotBlank(message = "E-mail em branco")
 	@Email(message = "E-mail inválido!")
 	private String email;

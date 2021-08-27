@@ -16,26 +16,14 @@ import br.com.zupacademy.gomesmr.casadocodigo.validator.VerificaEmailDuplicadoVa
 @RequestMapping("/autor")
 public class AutorController {
 	private final AutorRepository autorRepository;
-	private final VerificaEmailDuplicadoValidator verificaEmailDuplicadoValidator;
 
 	/**
 	 * 
 	 * @param autorRepository
 	 * @param verificaEmailDuplicadoValidator
 	 */
-	public AutorController(AutorRepository autorRepository, 
-					VerificaEmailDuplicadoValidator verificaEmailDuplicadoValidator) {
+	public AutorController(AutorRepository autorRepository) {
 		this.autorRepository = autorRepository;
-		this.verificaEmailDuplicadoValidator = verificaEmailDuplicadoValidator;
-	}
-	
-	/**
-	 * Realiza configurações adicionais na Request deste Controller
-	 * @param binder
-	 */
-	@InitBinder
-	public void init(WebDataBinder binder) {
-		binder.addValidators(verificaEmailDuplicadoValidator);
 	}
 
 	

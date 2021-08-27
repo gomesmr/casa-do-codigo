@@ -14,7 +14,7 @@ import br.com.zupacademy.gomesmr.casadocodigo.validator.UniqueValue;
  *
  */
 public class CategoriaForm {
-	@UniqueValue(domainClass = Categoria.class, fieldName = "nome", message= "banana é muito melhor que maça")
+	@UniqueValue(domainClass = Categoria.class, fieldName = "nome", message= "Esta categoria já consta no sistema.")
 	@NotBlank (message="Categoria em branco")
 	private String nome;
 
