@@ -5,13 +5,26 @@ package br.com.zupacademy.gomesmr.casadocodigo.categoria;
 
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
+import br.com.zupacademy.gomesmr.casadocodigo.validator.UniqueValue;
+
 /**
  * @author marcelo.gomes
  *
  */
 public class CategoriaForm {
+	@UniqueValue(domainClass = Categoria.class, fieldName = "nome", message= "banana é muito melhor que maça")
 	@NotBlank (message="Categoria em branco")
 	private String nome;
+
+	/**
+	 * @param nome
+	 */
+	@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+	public CategoriaForm(String nome) {
+		this.nome = nome;
+	}
 
 
 	public Categoria converter() {
