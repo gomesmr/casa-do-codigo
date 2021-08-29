@@ -4,12 +4,17 @@
 package br.com.zupacademy.gomesmr.casadocodigo.livro;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 /**
  * @author marcelo.gomes
@@ -28,14 +33,16 @@ public class LivroDetalhesController {
 	}
 
 	@GetMapping("/{id}")
-	public List<LivroDetalheDto> listarLivros(@PathVariable Long id) {
-		return livroRepository
-				.findById(id)
-				.stream()
-				.map(e -> new LivroDetalheDto(e.getId(), e.getTitulo(), e.getResumo(),
-						e.getSumario(), e.getPreco(), e.getNumPaginas(), e.getIsbn(),
-						e.getDataPublicacao(), e.getAutor() ))
-				.collect(Collectors.toList());
+	public Optional<Livro> listarLivros(@PathVariable @Valid Long id) 
+			throws Exception {
+		Optional<Livro> livroConsulta = livroRepository.findById(id);
+		
+		if(!livroConsulta.isEmpty()) {
+			return livroConsulta;
+		}
+		
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro não localizado");
+		
 	}
 
 }

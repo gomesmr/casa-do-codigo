@@ -10,9 +10,7 @@ public class AutorDetalheDto {
 	 * @param nome
 	 * @param descricao
 	 */
-	public AutorDetalheDto( 
-			String nome, 
-			String descricao) {
+	public AutorDetalheDto(String nome, String descricao) {
 		this.nome = nome;
 		this.descricao = descricao;
 
