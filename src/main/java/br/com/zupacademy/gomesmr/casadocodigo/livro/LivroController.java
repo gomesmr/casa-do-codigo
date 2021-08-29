@@ -3,9 +3,13 @@
  */
 package br.com.zupacademy.gomesmr.casadocodigo.livro;
 
+import java.util.List;
+
 import javax.validation.Valid;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +49,14 @@ public class LivroController {
 		return new LivroDto(livroRepository.save(novoLivro));
 	}
 	
+	@GetMapping
+	public List<ListagemLivros> listarLivros() {
+		return livroRepository
+				.findAll()
+				.stream()
+				.map(e -> new ListagemLivros(e.getId(), e.getTitulo()))
+				.collect(Collectors.toList());
+	}
 	
 
 }

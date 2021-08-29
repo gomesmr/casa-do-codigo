@@ -32,6 +32,7 @@ public class LivroForm {
 	private BigDecimal preco;
 	@Min(100)
 	private BigInteger numPaginas;
+	@UniqueValue(domainClass = Livro.class, fieldName = "isbn", message= "ISBN já cadastrado no sistema")
 	private String isbn;
 	@Future
 	private LocalDate dataPublicacao;

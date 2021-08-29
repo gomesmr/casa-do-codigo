@@ -13,8 +13,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.sun.istack.NotNull;
 
 import br.com.zupacademy.gomesmr.casadocodigo.autor.Autor;
 import br.com.zupacademy.gomesmr.casadocodigo.categoria.Categoria;
@@ -28,19 +33,30 @@ public class Livro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank
 	private String titulo;
 	@Size(max = 500)
 	private String resumo;
+	@NotBlank
 	private String sumario;
+	@NotNull
 	@Min(20)
 	private BigDecimal preco;
+	@NotNull
 	@Min(100)
 	private BigInteger numPaginas;
+	@NotBlank
 	private String isbn;
+	@NotNull
+	@Future
 	private LocalDate dataPublicacao;
+	@NotNull 
+	@Valid
 	@ManyToOne
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
+	@NotNull 
+	@Valid
 	@ManyToOne
 	@JoinColumn(name = "idAutor")
 	private Autor autor;
