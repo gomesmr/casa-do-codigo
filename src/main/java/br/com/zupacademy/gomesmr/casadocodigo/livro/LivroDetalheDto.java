@@ -7,14 +7,16 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.zupacademy.gomesmr.casadocodigo.autor.Autor;
-import br.com.zupacademy.gomesmr.casadocodigo.categoria.Categoria;
+import br.com.zupacademy.gomesmr.casadocodigo.autor.AutorDetalheDto;
 
 /**
  * @author marcelo.gomes
  *
  */
-public class LivroDto {
+public class LivroDetalheDto {
 	private Long id;
 	private String titulo;
 	private String resumo;
@@ -22,27 +24,37 @@ public class LivroDto {
 	private BigDecimal preco;
 	private BigInteger numPaginas;
 	private String isbn;
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataPublicacao;
-	private Categoria categoria;
 	private Autor autor;
 
-	
+	//AutorDetalheDto autorDetalhe.autorToDetalhe(autor);
+
 	/**
 	 * 
-	 * @param livro
+	 * @param id
+	 * @param titulo
+	 * @param resumo
+	 * @param sumario
+	 * @param preco
+	 * @param numPaginas
+	 * @param isbn
+	 * @param dataPublicacao
+	 * @param autor
 	 */
-	public LivroDto(Livro livro) {
-		this.id = livro.getId();
-		this.titulo = livro.getTitulo();
-		this.resumo = livro.getResumo();
-		this.sumario = livro.getSumario();
-		this.preco = livro.getPreco();
-		this.numPaginas = livro.getNumPaginas();
-		this.isbn = livro.getIsbn();
-		this.dataPublicacao = livro.getDataPublicacao();
-		this.categoria = livro.getCategoria();
-		this.autor = livro.getAutor();
+	public LivroDetalheDto(Long id, String titulo, String resumo, String sumario, BigDecimal preco,
+			BigInteger numPaginas, String isbn, LocalDate dataPublicacao, Autor autor) {
+		this.id = id;
+		this.titulo = titulo;
+		this.resumo = resumo;
+		this.sumario = sumario;
+		this.preco = preco;
+		this.numPaginas = numPaginas;
+		this.isbn = isbn;
+		this.dataPublicacao = dataPublicacao;
+		this.autor = autor;
 	}
+
 	/**
 	 * @return the id
 	 */
@@ -130,7 +142,7 @@ public class LivroDto {
 	/**
 	 * @return the dataPublicação
 	 */
-	public LocalDate dataPublicacao() {
+	public LocalDate getDataPublicacao() {
 		return dataPublicacao;
 	}
 	/**
@@ -138,18 +150,6 @@ public class LivroDto {
 	 */
 	public void setDataPublicação(LocalDate dataPublicacao) {
 		this.dataPublicacao = dataPublicacao;
-	}
-	/**
-	 * @return the categoria
-	 */
-	public Categoria getCategoria() {
-		return categoria;
-	}
-	/**
-	 * @param categoria the categoria to set
-	 */
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
 	}
 	/**
 	 * @return the autor

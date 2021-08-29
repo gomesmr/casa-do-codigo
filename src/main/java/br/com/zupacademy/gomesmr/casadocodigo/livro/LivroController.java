@@ -4,10 +4,11 @@
 package br.com.zupacademy.gomesmr.casadocodigo.livro;
 
 import java.util.List;
-
-import javax.validation.Valid;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,21 +27,24 @@ import br.com.zupacademy.gomesmr.casadocodigo.categoria.CategoriaRepository;
 @RestController
 @RequestMapping("/livro")
 public class LivroController {
-	private final LivroRepository livroRepository;
-	private final AutorRepository autorRepository;
-	private final CategoriaRepository categoriaRepository;
+	@Autowired
+	private LivroRepository livroRepository;
+	@Autowired
+	private AutorRepository autorRepository;
+	@Autowired
+	private CategoriaRepository categoriaRepository;
 
 	/**
 	 * @param livroRepository
 	 */
-	public LivroController(LivroRepository livroRepository,
-								AutorRepository autorRepository,
-								CategoriaRepository categoriaRepository) {
-		this.livroRepository = livroRepository;
-		this.autorRepository = autorRepository;
-		this.categoriaRepository = categoriaRepository;
-	}
-	
+//	public LivroController(LivroRepository livroRepository,
+//								AutorRepository autorRepository,
+//								CategoriaRepository categoriaRepository) {
+//		this.livroRepository = livroRepository;
+//		this.autorRepository = autorRepository;
+//		this.categoriaRepository = categoriaRepository;
+//	}
+//	
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public LivroDto criarLivro(@RequestBody @Valid LivroForm form) 
@@ -50,11 +54,11 @@ public class LivroController {
 	}
 	
 	@GetMapping
-	public List<ListagemLivros> listarLivros() {
+	public List<LivrosListagem> listarLivros() {
 		return livroRepository
 				.findAll()
 				.stream()
-				.map(e -> new ListagemLivros(e.getId(), e.getTitulo()))
+				.map(e -> new LivrosListagem(e.getId(), e.getTitulo()))
 				.collect(Collectors.toList());
 	}
 	

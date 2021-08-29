@@ -7,7 +7,7 @@ package br.com.zupacademy.gomesmr.casadocodigo.livro;
  * @author marcelo.gomes
  *
  */
-public class ListagemLivros {
+public class LivrosListagem {
 	private Long id;
 	private String titulo;
 	
@@ -15,8 +15,7 @@ public class ListagemLivros {
 	 * @param id
 	 * @param titulo
 	 */
-	public ListagemLivros(Long id, String titulo) {
-		super();
+	public LivrosListagem(Long id, String titulo) {
 		this.id = id;
 		this.titulo = titulo;
 	}

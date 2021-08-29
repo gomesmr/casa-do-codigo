@@ -89,6 +89,8 @@ public class Livro {
 		this.autor = autor;
 	}
 
+
+
 	/**
 	 * @return the id
 	 */
@@ -141,7 +143,7 @@ public class Livro {
 	/**
 	 * @return the dataPublicação
 	 */
-	public LocalDate dataPublicacao() {
+	public LocalDate getDataPublicacao() {
 		return dataPublicacao;
 	}
 

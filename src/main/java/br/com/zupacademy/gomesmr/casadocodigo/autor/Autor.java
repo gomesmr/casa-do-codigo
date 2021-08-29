@@ -58,6 +58,12 @@ public class Autor {
 		this.instanteCriacao = instanteCriacao;
 		this.livrosDesteAutor = livrosDesteAutor;
 	}
+	
+	public Autor(String nome, 
+			String descricao) {
+		this.nome = nome;
+		this.descricao = descricao;
+	}
 
 
 	/**
