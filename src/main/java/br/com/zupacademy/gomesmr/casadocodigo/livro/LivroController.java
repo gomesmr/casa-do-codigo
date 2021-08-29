@@ -34,17 +34,7 @@ public class LivroController {
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 
-	/**
-	 * @param livroRepository
-	 */
-//	public LivroController(LivroRepository livroRepository,
-//								AutorRepository autorRepository,
-//								CategoriaRepository categoriaRepository) {
-//		this.livroRepository = livroRepository;
-//		this.autorRepository = autorRepository;
-//		this.categoriaRepository = categoriaRepository;
-//	}
-//	
+	
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public LivroDto criarLivro(@RequestBody @Valid LivroForm form) 
