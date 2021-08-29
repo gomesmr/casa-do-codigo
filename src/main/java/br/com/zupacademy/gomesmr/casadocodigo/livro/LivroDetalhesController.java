@@ -3,9 +3,7 @@
  */
 package br.com.zupacademy.gomesmr.casadocodigo.livro;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -33,12 +31,13 @@ public class LivroDetalhesController {
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Livro> listarLivros(@PathVariable @Valid Long id) 
+	public LivroDetalheDto listarLivros(@PathVariable @Valid Long id) 
 			throws Exception {
 		Optional<Livro> livroConsulta = livroRepository.findById(id);
 		
 		if(!livroConsulta.isEmpty()) {
-			return livroConsulta;
+			LivroDetalheDto livroDetalhado = new LivroDetalheDto(livroConsulta.get());
+			return livroDetalhado;
 		}
 		
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro não localizado");

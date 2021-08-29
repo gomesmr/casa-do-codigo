@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.zupacademy.gomesmr.casadocodigo.autor.Autor;
-import br.com.zupacademy.gomesmr.casadocodigo.autor.AutorDetalheDto;
 
 /**
  * @author marcelo.gomes
@@ -27,32 +26,17 @@ public class LivroDetalheDto {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataPublicacao;
 	private Autor autor;
-
-	//AutorDetalheDto autorDetalhe.autorToDetalhe(autor);
-
-	/**
-	 * 
-	 * @param id
-	 * @param titulo
-	 * @param resumo
-	 * @param sumario
-	 * @param preco
-	 * @param numPaginas
-	 * @param isbn
-	 * @param dataPublicacao
-	 * @param autor
-	 */
-	public LivroDetalheDto(Long id, String titulo, String resumo, String sumario, BigDecimal preco,
-			BigInteger numPaginas, String isbn, LocalDate dataPublicacao, Autor autor) {
-		this.id = id;
-		this.titulo = titulo;
-		this.resumo = resumo;
-		this.sumario = sumario;
-		this.preco = preco;
-		this.numPaginas = numPaginas;
-		this.isbn = isbn;
-		this.dataPublicacao = dataPublicacao;
-		this.autor = autor;
+	
+	public LivroDetalheDto(Livro livro) {
+		this.id = livro.getId();
+		this.titulo = livro.getTitulo();
+		this.resumo = livro.getResumo();
+		this.sumario = livro.getSumario();
+		this.preco = livro.getPreco();
+		this.numPaginas = livro.getNumPaginas();
+		this.isbn = livro.getIsbn();
+		this.dataPublicacao = livro.getDataPublicacao();
+		this.autor = livro.getAutor();
 	}
 
 	/**
