@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.zupacademy.gomesmr.casadocodigo.paisEstados;
+package br.com.zupacademy.gomesmr.casadocodigo.paisEstado;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,10 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import br.com.zupacademy.gomesmr.casadocodigo.validator.UniqueValue;
 
 /**
  * @author marcelo.gomes
@@ -24,8 +20,6 @@ public class Estado {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@UniqueValue(domainClass = Estado.class, fieldName = "nome", message = "Este Estado já foi cadastrado neste País.")
-	@NotBlank(message = "Nome do Estado em branco")
 	private String nome;
 	@ManyToOne
 	@JoinColumn(name = "idPais")

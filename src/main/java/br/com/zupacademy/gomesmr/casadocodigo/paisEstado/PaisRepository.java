@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.zupacademy.gomesmr.casadocodigo.paisEstados;
+package br.com.zupacademy.gomesmr.casadocodigo.paisEstado;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

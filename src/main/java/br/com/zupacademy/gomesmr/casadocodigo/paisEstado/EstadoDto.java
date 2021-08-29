@@ -1,9 +1,7 @@
 /**
  * 
  */
-package br.com.zupacademy.gomesmr.casadocodigo.paisEstados;
-
-import javax.validation.constraints.NotBlank;
+package br.com.zupacademy.gomesmr.casadocodigo.paisEstado;
 
 /**
  * @author marcelo.gomes
@@ -65,8 +63,4 @@ public class EstadoDto {
 	public void setPais(Pais pais) {
 		this.pais = pais;
 	}
-
-	
-
-
 }

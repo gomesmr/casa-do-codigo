@@ -1,7 +1,9 @@
 /**
  * 
  */
-package br.com.zupacademy.gomesmr.casadocodigo.paisEstados;
+package br.com.zupacademy.gomesmr.casadocodigo.paisEstado;
+
+import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 
 /**
  * @author marcelo.gomes
@@ -28,7 +29,7 @@ public class PaisController {
 	}
 
 	@PostMapping
-	private ResponseEntity<PaisDto> cadastra(@RequestBody PaisForm form) 
+	private ResponseEntity<PaisDto> cadastra(@RequestBody @Valid PaisForm form) 
 			throws Exception {
 		Pais pais = paisRepository.save(form.converter());
 

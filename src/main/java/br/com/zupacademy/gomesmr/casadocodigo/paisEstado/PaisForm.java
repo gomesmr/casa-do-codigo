@@ -1,11 +1,9 @@
 /**
  * 
  */
-package br.com.zupacademy.gomesmr.casadocodigo.paisEstados;
+package br.com.zupacademy.gomesmr.casadocodigo.paisEstado;
 
 import javax.validation.constraints.NotBlank;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
 
 import br.com.zupacademy.gomesmr.casadocodigo.validator.UniqueValue;
 
@@ -14,11 +12,9 @@ import br.com.zupacademy.gomesmr.casadocodigo.validator.UniqueValue;
  *
  */
 public class PaisForm {
-	//@UniqueValue(domainClass = Pais.class, fieldName = "nome", message= "Este País já consta no sistema.")
-	//@NotBlank (message="Nome do país em branco")
+	@UniqueValue(domainClass = Pais.class, fieldName = "nome", message= "Este País já consta no sistema.")
+	@NotBlank (message="Nome do país em branco")
 	private String nome;
-	
-	
 
 	/**
 	 * 
@@ -50,9 +46,5 @@ public class PaisForm {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
-	
-	
 
 }

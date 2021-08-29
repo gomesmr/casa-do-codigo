@@ -51,12 +51,12 @@ public class Livro {
 	@Future
 	private LocalDate dataPublicacao;
 	@NotNull 
-	@Valid
+	//@Valid
 	@ManyToOne
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
 	@NotNull 
-	@Valid
+	//@Valid
 	@ManyToOne
 	@JoinColumn(name = "idAutor")
 	private Autor autor;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.zupacademy.gomesmr.casadocodigo.paisEstados;
+package br.com.zupacademy.gomesmr.casadocodigo.paisEstado;
 
 import javax.validation.constraints.NotBlank;
 
@@ -14,8 +14,8 @@ import br.com.zupacademy.gomesmr.casadocodigo.validator.UniqueValue;
  *
  */
 public class EstadoForm {
-	@UniqueValue(domainClass = Pais.class, fieldName = "nome", message = "Este País já consta no sistema.")
-	@NotBlank(message = "Nome do país em branco")
+	@UniqueValue(domainClass = Estado.class, fieldName = "nome", message = "Este Estado já consta para este País.")
+	@NotBlank(message = "Nome do estado em branco")
 	private String nome;
 	private Long idPais;
 
@@ -62,3 +62,4 @@ public class EstadoForm {
 	}
 
 }
+

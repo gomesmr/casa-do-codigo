@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.zupacademy.gomesmr.casadocodigo.paisEstados;
+package br.com.zupacademy.gomesmr.casadocodigo.paisEstado;
 
 import javax.validation.Valid;
 
@@ -42,3 +42,4 @@ public class EstadoController {
 	}
 
 }
+

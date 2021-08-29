@@ -1,16 +1,12 @@
-/**
+	/**
  * 
  */
-package br.com.zupacademy.gomesmr.casadocodigo.paisEstados;
+package br.com.zupacademy.gomesmr.casadocodigo.paisEstado;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-
-import br.com.zupacademy.gomesmr.casadocodigo.categoria.Categoria;
-import br.com.zupacademy.gomesmr.casadocodigo.validator.UniqueValue;
 
 /**
  * @author marcelo.gomes
@@ -21,8 +17,6 @@ public class Pais {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	//@UniqueValue(domainClass = Categoria.class, fieldName = "nome", message= "Este País já foi cadastrado.")
-	//@NotBlank (message="Nome do País em branco")
 	private String nome;
 	/**
 	 * 
@@ -48,3 +42,4 @@ public class Pais {
 		return nome;
 	}
 }
+
