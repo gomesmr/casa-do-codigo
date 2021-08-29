@@ -1,11 +1,12 @@
 package br.com.zupacademy.gomesmr.casadocodigo.autor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import br.com.zupacademy.gomesmr.casadocodigo.categoria.Categoria;
+import br.com.zupacademy.gomesmr.casadocodigo.livro.Livro;
 import br.com.zupacademy.gomesmr.casadocodigo.validator.UniqueValue;
 
 public class AutorForm {
@@ -17,6 +18,7 @@ public class AutorForm {
 	private String email;
 	@NotBlank (message="Insira uma descrição")
 	private String descricao;
+	private List<Livro> livrosDesteAutor;
 	
 	
 	
@@ -25,15 +27,16 @@ public class AutorForm {
 	 * @param email
 	 * @param descricao
 	 */
-	public AutorForm(String nome, String email, String descricao) {
+	public AutorForm(String nome, String email, String descricao, List<Livro> livrosDesteAutor) {
 		this.nome = nome;
 		this.email = email;
 		this.descricao = descricao;
+		this.livrosDesteAutor = livrosDesteAutor;
 	}
 
 
 	public Autor converter() {
-			return new Autor(this.nome, this.email, this.descricao, LocalDateTime.now());
+			return new Autor(this.nome, this.email, this.descricao, LocalDateTime.now(), this.livrosDesteAutor);
 		}
 
 
@@ -57,6 +60,16 @@ public class AutorForm {
 	public String getDescricao() {
 		return descricao;
 	}
+
+
+	/**
+	 * @return the livrosDesteAutor
+	 */
+	public List<Livro> getLivrosDesteAutor() {
+		return livrosDesteAutor;
+	}
+	
+	
 
 
 	

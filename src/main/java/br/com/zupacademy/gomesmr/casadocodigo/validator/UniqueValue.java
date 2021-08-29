@@ -34,7 +34,7 @@ public @interface UniqueValue {
 	/**
 	 * As informações desse bloco são obrigatórias
 	 * Mensagem padrão caso a validação dê erro
-	 * @return
+	 * @return String Mensagem que será exibida sobre o erro
 	 */
     String message() default "Este campo precisa ser único";
     /**
