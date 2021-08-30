@@ -4,9 +4,11 @@
 package br.com.zupacademy.gomesmr.casadocodigo.paisEstado;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
+import br.com.zupacademy.gomesmr.casadocodigo.validator.ExistsId;
 import br.com.zupacademy.gomesmr.casadocodigo.validator.UniqueValue;
 
 /**
@@ -17,6 +19,7 @@ public class EstadoForm {
 	@UniqueValue(domainClass = Estado.class, fieldName = "nome", message = "Este Estado já consta para este País.")
 	@NotBlank(message = "Nome do estado em branco")
 	private String nome;
+	@ExistsId(classe = Pais.class, message = "Pais não cadastrado no sistema")
 	private Long idPais;
 
 	/**

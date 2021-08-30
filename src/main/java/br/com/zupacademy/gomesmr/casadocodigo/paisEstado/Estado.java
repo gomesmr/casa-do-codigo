@@ -24,6 +24,13 @@ public class Estado {
 	@ManyToOne
 	@JoinColumn(name = "idPais")
 	private Pais pais;
+	
+	
+
+	/**
+	 * 
+	 */
+	public Estado() {	}
 
 	/**
 	 * @param id
@@ -64,6 +71,10 @@ public class Estado {
 
 	public EstadoDto resposta() {
 		return new EstadoDto(this.id, this.nome, this.pais);
+	}
+	
+	public boolean estadoPertenceAoPais(Long idPais) {
+		return this.pais.getId() == idPais;
 	}
 
 }
