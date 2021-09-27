@@ -2,6 +2,7 @@ package com.zupacademy.casadocodigo.validator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -20,7 +21,7 @@ public class ErrosDeValidacaoHandler {
     private MessageSource messageSource;
 
     @ResponseStatus(code= HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({MethodArgumentNotValidException.class, IllegalStateException.class})
+    @ExceptionHandler({MethodArgumentNotValidException.class, IllegalStateException.class, NoSuchElementException.class})
     public List<ErrosDadosDto> handle (MethodArgumentNotValidException exception){
         List<ErrosDadosDto> dto = new ArrayList<>();
         List<FieldError> fe = exception.getBindingResult().getFieldErrors();

@@ -81,108 +81,48 @@ public class Cliente {
 		setEstado(estado);
 	}
 
-	public Cliente(String nome, String sobrenome, String email, String telefone,
-			String documento, String cep, String endereco,
-			String complemento, String cidade, Pais pais) {
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.email = email;
-		this.telefone = telefone;
-		this.documento = documento;
-		this.cep = cep;
-		this.endereco = endereco;
-		this.complemento = complemento;
-		this.cidade = cidade;
-		this.pais = pais;
-	}
-
-	/**
-	 * @return the id
-	 */
 	Long getId() {
 		return id;
 	}
-
-	/**
-	 * @return the nome
-	 */
 	String getNome() {
 		return nome;
 	}
-
-	/**
-	 * @return the sobrenome
-	 */
 	String getSobrenome() {
 		return sobrenome;
 	}
-
-	/**
-	 * @return the email
-	 */
 	String getEmail() {
 		return email;
 	}
-
-	/**
-	 * @return the telefone
-	 */
 	String getTelefone() {
 		return telefone;
 	}
-
-	/**
-	 * @return the documento
-	 */
 	String getDocumento() {
 		return documento;
 	}
-
-	/**
-	 * @return the cep
-	 */
 	String getCep() {
 		return cep;
 	}
-
-	/**
-	 * @return the endereco
-	 */
 	String getEndereco() {
 		return endereco;
 	}
-
-	/**
-	 * @return the complemento
-	 */
 	String getComplemento() {
 		return complemento;
 	}
-
-	/**
-	 * @return the cidade
-	 */
 	String getCidade() {
 		return cidade;
 	}
-
-	/**
-	 * @return the pais
-	 */
 	Pais getPais() {
 		return pais;
 	}
-	
-    /**
-	 * @return the estado
-	 */
 	Estado getEstado() {
 		return estado;
 	}
 	
     public void setEstado(Estado estado) {
-        Assert.isTrue(estado.estadoPertenceAoPais(this.pais.getId()),"Este estado não pertence ao pais escolhido");
-        this.estado = estado;
+		if (estado != null) {
+			Assert.isTrue(estado.estadoPertenceAoPais(this.pais.getId()), "Este estado não pertence ao pais escolhido");
+			this.estado = estado;
+		}
     }
 	
 }

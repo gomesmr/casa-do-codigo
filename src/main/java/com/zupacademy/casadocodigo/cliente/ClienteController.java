@@ -3,10 +3,13 @@
  */
 package com.zupacademy.casadocodigo.cliente;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,13 +33,16 @@ public class ClienteController {
 	private PaisRepository paisRepository;
 	@Autowired
 	private EstadoRepository estadoRepository;
+
+	@PersistenceContext
+	private EntityManager manager;
 	
 	@PostMapping
-	@ResponseStatus(code = HttpStatus.CREATED)
-	public ClienteDto cadastrar(@RequestBody @Valid ClienteForm form) 
+	public ResponseEntity<ClienteDto> cadastrar(@RequestBody @Valid ClienteForm form)
 		throws Exception{
-		Cliente novoCliente = form.toModel(paisRepository, estadoRepository);
-		return new ClienteDto(clienteRepository.save(novoCliente));
+		Cliente novoCliente = form.toModel(paisRepository, estadoRepository, manager);
+		ClienteDto clienteDto = new ClienteDto(clienteRepository.save(novoCliente));
+		return ResponseEntity.status(HttpStatus.CREATED).body(clienteDto);
 	}
 	
 }
