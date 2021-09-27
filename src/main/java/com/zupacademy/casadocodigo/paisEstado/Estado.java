@@ -69,10 +69,21 @@ public class Estado {
 		return pais;
 	}
 
+	/**
+	 *
+	 * @return EstadoDto
+	 */
 	public EstadoDto resposta() {
 		return new EstadoDto(this.id, this.nome, this.pais);
 	}
-	
+
+	/**
+	 * Verifica se o estado pertence ao país
+	 * testando se o ID do país desse estado é igual
+	 * ao id do país recebido no DTO
+	 * @param idPais
+	 * @return
+	 */
 	public boolean estadoPertenceAoPais(Long idPais) {
 		return this.pais.getId() == idPais;
 	}

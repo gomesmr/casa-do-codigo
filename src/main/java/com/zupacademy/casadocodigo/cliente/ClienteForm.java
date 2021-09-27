@@ -4,6 +4,7 @@
 package com.zupacademy.casadocodigo.cliente;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -24,7 +25,10 @@ import com.zupacademy.casadocodigo.paisEstado.Pais;
 import com.zupacademy.casadocodigo.paisEstado.PaisRepository;
 import com.zupacademy.casadocodigo.validator.UniqueValue;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.Assert;
 import org.springframework.web.server.ResponseStatusException;
+
+import static org.springframework.util.Assert.state;
 
 /**
  * @author marcelo.gomes
@@ -76,198 +80,31 @@ public class ClienteForm {
 		this.idEstado = idEstado;
 	}
 
-	/**
-	 * Método para montar o objeto Cliente que será gravado no banco
-	 * @param paisRepository
-	 * @param estadoRepository
-	 * @return
-	 * p	e
-	 * 0	0	0
-	 * 0	1	0
-	 * 1	0	0
-	 * 1	1	1
-	 *
-	 * existe pais? Monaco
-	 * 		existe estado? sim Ceará
-	 * 			Verifica se estado pertence ao pais
-	 * 				Se existe -> salva
-	 * 				Se não    -> Bad-Request
-	 * 		não existe estado
-	 * 			Verifica se estado foi informado  -> Bad-Request
-	 * 			Se não existe estado -> salva
-	 *
-	 * 		 * existe pais?
-	 * 	   			O país possui estados?
-	 * 	 					Sim
-	 * 	 						O idEstado está presente?
-	 * 	 								Sim
-	 * 	 										Este estado pertence a este pais?
-	 * 	 												Sim -> Salva
-	 *
-	 * 	 												Não	-> Bad_request
-	 * 	 								Não	-> Bad_request
-	 * 	 					Não
-	 * 	 						O idEstado está presente?
-	 * 	 							Sim -> 	Bad_request
-	 * 	 							Não -> Salva
-	 *
-	 *
-	 */
 
-	/**
-	 *
-
-
-	public Cliente toModel(PaisRepository paisRepository, EstadoRepository estadoRepository) {
-		Optional<Pais> paisOpt = paisRepository.findById(idPais);
-		if (paisOpt.isPresent()) {
-			//existe estado neste país?
-			Pais pais = paisOpt.get();
-
-			//Verificar se id é nulo
-			if (idEstado != null) {
-				//Verifica se estado pertence ao pais
-				if ()
-				Optional<Estado> estadoOpt = estadoRepository.findById(idEstado);
-				if (estadoOpt.isPresent()) {
-					Estado estado = estadoOpt.get();
-					return new Cliente(nome, sobrenome, email, telefone,
-							documento, cep, endereco, complemento,
-							cidade, pais, estado);
-				}
-			}
-			return new Cliente(nome, sobrenome, email, telefone,
-					documento, cep, endereco, complemento,
-					cidade, pais, null);
+	public Cliente toModel(EntityManager manager) {
+		Pais pais = manager.find(Pais.class, idPais);
+		state(Objects.nonNull(pais), "Este país não consta no sistema");
+		if (estadosDoPais(manager, pais) && idEstado == null) {
+			//Se país não possui estados
+			return new Cliente(nome, sobrenome, email, telefone, documento, cep, endereco, complemento, cidade, pais, null);
 		}
+		//Lista de estados não voltou vazia
+		//O estado pertence ao país?
+		Estado estado = manager.find(Estado.class, idEstado);
+		state(Objects.nonNull(estado), "Este estado não é válido");
 
-		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "País inexistente");
-	}
-	 */
-	public Cliente toModel(PaisRepository paisRepository, EstadoRepository estadoRepository, EntityManager manager) {
-		Optional<Pais> paisOpt = paisRepository.findById(idPais);
-		if (paisOpt.isPresent() && paisNaoTemEstados(manager) && idEstado == null) {
-			Pais pais = paisOpt.get();
-			return new Cliente(nome, sobrenome, email, telefone,
-					documento, cep, endereco, complemento,
-					cidade, pais, null);
-
+		if (estado.estadoPertenceAoPais(idPais)) {
+			return new Cliente(nome, sobrenome, email, telefone, documento, cep, endereco, complemento, cidade, pais, estado);
 		}
-		Optional<Estado> estadoOpt = estadoRepository.findById(idEstado);
-		if (estadoOpt.isPresent() && estadoOpt.get().estadoPertenceAoPais(idPais)) {
-			Pais pais = paisOpt.get();
-			Estado estado = estadoOpt.get();
-			return new Cliente(nome, sobrenome, email, telefone,
-					documento, cep, endereco, complemento,
-					cidade, pais, estado);
-		}
-		else if (!estadoOpt.isPresent()){
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Estado inexistente 0001");
-		}
-		else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Este país não possui estados");
-
-	}
-
-	@Transactional
-	public boolean paisNaoTemEstados(EntityManager manager){
-		Query query = manager.createQuery("SELECT e FROM " + Estado.class.getName() + " e WHERE pais_id = :criterio");
-		query.setParameter("criterio", idPais);
-		List<?> list = query.getResultList();
-		if (list.isEmpty()) {
-			return true;
-		} else {
-			return false;
-	}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "O país " + pais.getNome() + " não possui estados");
 }
-//	/**
-//	 * GTTRS & STTRS
-//	 */
-//	String getNome() {
-//		return nome;
-//	}
-//
-//	void setNome(String nome) {
-//		this.nome = nome;
-//	}
-//
-//	String getSobrenome() {
-//		return sobrenome;
-//	}
-//
-//	void setSobrenome(String sobrenome) {
-//		this.sobrenome = sobrenome;
-//	}
-//
-//	String getEmail() {
-//		return email;
-//	}
-//
-//	void setEmail(String email) {
-//		this.email = email;
-//	}
-//
-//	String getTelefone() {
-//		return telefone;
-//	}
-//
-//	void setTelefone(String telefone) {
-//		this.telefone = telefone;
-//	}
-//
-//	String getDocumento() {
-//		return documento;
-//	}
-//
-//	void setDocumento(String documento) {
-//		this.documento = documento;
-//	}
-//
-//	String getCep() {
-//		return cep;
-//	}
-//
-//	void setCep(String cep) {
-//		this.cep = cep;
-//	}
-//
-//	String getEndereco() {
-//		return endereco;
-//	}
-//
-//	void setEndereco(String endereco) {
-//		this.endereco = endereco;
-//	}
-//
-//	String getComplemento() {
-//		return complemento;
-//	}
-//
-//	void setComplemento(String complemento) {
-//		this.complemento = complemento;
-//	}
-//
-//	String getCidade() {
-//		return cidade;
-//	}
-//
-//	void setCidade(String cidade) {
-//		this.cidade = cidade;
-//	}
-//
-//	Long getIdPais() {
-//		return idPais;
-//	}
-//
-//	void setIdPais(Long idPais) {
-//		this.idPais = idPais;
-//	}
-//
-//	Long getIdEstado() {
-//		return idEstado;
-//	}
-//
-//	void setIdEstado(Long idEstado) {
-//		this.idEstado = idEstado;
-//	}
 
+	private boolean estadosDoPais(EntityManager manager, Pais pais) {
+		//A partir do pais, localizar se o pais tem estados
+		//Usar JPQL
+		Query query = manager.createQuery("SELECT e FROM " + Estado.class.getName() + " e WHERE id_pais = :criteria ");
+		query.setParameter("criteria", idPais);
+		List<?> list = query.getResultList();
+		return list.isEmpty();
+	}
 }

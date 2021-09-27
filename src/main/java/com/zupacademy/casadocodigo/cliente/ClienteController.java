@@ -40,7 +40,7 @@ public class ClienteController {
 	@PostMapping
 	public ResponseEntity<ClienteDto> cadastrar(@RequestBody @Valid ClienteForm form)
 		throws Exception{
-		Cliente novoCliente = form.toModel(paisRepository, estadoRepository, manager);
+		Cliente novoCliente = form.toModel(manager);
 		ClienteDto clienteDto = new ClienteDto(clienteRepository.save(novoCliente));
 		return ResponseEntity.status(HttpStatus.CREATED).body(clienteDto);
 	}

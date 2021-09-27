@@ -119,10 +119,7 @@ public class Cliente {
 	}
 	
     public void setEstado(Estado estado) {
-		if (estado != null) {
-			Assert.isTrue(estado.estadoPertenceAoPais(this.pais.getId()), "Este estado não pertence ao pais escolhido");
-			this.estado = estado;
-		}
+		this.estado = estado;
     }
 	
 }
